@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "EncryptionDesktop (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "EncryptionDesktop (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
