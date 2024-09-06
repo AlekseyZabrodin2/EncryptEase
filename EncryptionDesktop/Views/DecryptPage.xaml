@@ -11,7 +11,10 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     mc:Ignorable="d">
 
-    <Grid>
+    <ScrollView
+        Height="640"
+        VerticalScrollBarVisibility="Auto"
+        VerticalScrollMode="Auto">
         <StackPanel
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
@@ -20,11 +23,13 @@
 
             <TextBox
                 x:Name="TextForDecryption"
-                Foreground="Yellow"
+                Width="450"
+                MaxWidth="600"
                 Header="Enter Text for decryption:"
                 IsSpellCheckEnabled="False"
                 PlaceholderText="text"
-                Text="{Binding InputCiphertext, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                Text="{Binding InputCiphertext, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                TextWrapping="Wrap" />
 
             <Grid ColumnDefinitions="400, *" ColumnSpacing="10">
                 <TextBox
@@ -36,7 +41,7 @@
                     Grid.Column="1"
                     VerticalAlignment="Bottom"
                     Command="{Binding CopyKeyInClipboardCommand}">
-                    <SymbolIcon Symbol="Copy" />
+                    <SymbolIcon Symbol="{Binding CopyKeyButtonIcon}" />
                 </Button>
             </Grid>
 
@@ -50,7 +55,7 @@
                     Grid.Column="1"
                     VerticalAlignment="Bottom"
                     Command="{Binding CopySaltInClipboardCommand}">
-                    <SymbolIcon Symbol="Copy" />
+                    <SymbolIcon Symbol="{Binding CopySaltButtonIcon}" />
                 </Button>
             </Grid>
 
@@ -81,22 +86,26 @@
                 <CheckBox Content="32" IsChecked="{Binding Bit32IsChecked, Mode=TwoWay}" />
             </StackPanel>
 
-            <Grid ColumnDefinitions="400, *" ColumnSpacing="10">
+            <Grid
+                MaxWidth="600"
+                ColumnDefinitions="400, *"
+                ColumnSpacing="10">
                 <TextBox
                     x:Name="ResultDecryptingText"
                     MinWidth="400"
                     HorizontalContentAlignment="Center"
                     FontWeight="SemiBold"
-                    Foreground="Orange"
+                    Foreground="Yellow"
                     Header="Decryption result:"
                     IsReadOnly="True"
                     PlaceholderText="result"
-                    Text="{Binding ResultDecryptingText}" />
-                <Button 
+                    Text="{Binding ResultDecryptingText}"
+                    TextWrapping="Wrap" />
+                <Button
                     Grid.Column="1"
                     VerticalAlignment="Bottom"
                     Command="{Binding CopyResultInClipboardCommand}">
-                    <SymbolIcon Symbol="Copy" />
+                    <SymbolIcon Symbol="{Binding CopyResulButtonIcon}" />
                 </Button>
             </Grid>
 
@@ -124,5 +133,5 @@
 
         </StackPanel>
 
-    </Grid>
+    </ScrollView>
 </Page>

@@ -58,6 +58,15 @@ namespace EncryptionDesktop.ViewModels
         [ObservableProperty]
         private InfoBarSeverity _infoBarSeverity;
 
+        [ObservableProperty]
+        private Symbol _copyResulButtonIcon = Symbol.Copy;
+
+        [ObservableProperty]
+        private Symbol _copySaltButtonIcon = Symbol.Copy;
+
+        [ObservableProperty]
+        private Symbol _copyKeyButtonIcon = Symbol.Copy;
+
         private bool _bit16IsChecked;
         public bool Bit16IsChecked
         {
@@ -191,35 +200,50 @@ namespace EncryptionDesktop.ViewModels
         }
 
         [RelayCommand]
-        private void CopyResultInClipboard()
+        private async Task CopyResultInClipboard()
         {
             if (!string.IsNullOrEmpty(ResultDecryptingText))
             {
                 var package = new DataPackage();
                 package.SetText(ResultDecryptingText);
                 Clipboard.SetContent(package);
+
+                CopyResulButtonIcon = Symbol.Accept;
+
+                await Task.Delay(500);
+                CopyResulButtonIcon = Symbol.Copy;
             }
         }
 
         [RelayCommand]
-        private void CopySaltInClipboard()
-        {
-            if (!string.IsNullOrEmpty(SaltText))
-            {
-                var package = new DataPackage();
-                package.SetText(SaltText);
-                Clipboard.SetContent(package);
-            }
-        }
-
-        [RelayCommand]
-        private void CopyKeyInClipboard()
+        private async Task CopyKeyInClipboard()
         {
             if (!string.IsNullOrEmpty(DecryptionKey))
             {
                 var package = new DataPackage();
                 package.SetText(DecryptionKey);
                 Clipboard.SetContent(package);
+
+                CopyKeyButtonIcon = Symbol.Accept;
+
+                await Task.Delay(500);
+                CopyKeyButtonIcon = Symbol.Copy;
+            }
+        }
+
+        [RelayCommand]
+        private async Task CopySaltInClipboard()
+        {
+            if (!string.IsNullOrEmpty(SaltText))
+            {
+                var package = new DataPackage();
+                package.SetText(SaltText);
+                Clipboard.SetContent(package);
+
+                CopySaltButtonIcon = Symbol.Accept;
+
+                await Task.Delay(500);
+                CopySaltButtonIcon = Symbol.Copy;
             }
         }
     }
