@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using EncryptionDesktop.Services;
+using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using System;
 using System.Collections.Generic;
@@ -52,7 +53,10 @@ namespace EncryptionDesktop.ViewModels
         private string? _resultStatus;
 
         [ObservableProperty]
-        private SolidColorBrush _resultStatusForeground;
+        private bool _infoBarIsOpen;
+
+        [ObservableProperty]
+        private InfoBarSeverity _infoBarSeverity;
 
         private bool _bit16IsChecked;
         public bool Bit16IsChecked
@@ -150,12 +154,14 @@ namespace EncryptionDesktop.ViewModels
                     string.IsNullOrEmpty(DecryptionKey))
                 {
                     IsEnabledButtons = false;
+                    InfoBarIsOpen = true;
+                    InfoBarSeverity = InfoBarSeverity.Error;
                     ResultStatus = $"One of the fields is empty";
-                    ResultStatusForeground = new SolidColorBrush(Microsoft.UI.Colors.Red);
                 }
                 else
                 {
                     IsEnabledButtons = true;
+                    InfoBarIsOpen = false;
                     ResultStatus = string.Empty;
                 }
             }
@@ -171,13 +177,15 @@ namespace EncryptionDesktop.ViewModels
             {
                 ResultDecryptingText = ServiceEncryption.Decrypt(InputCiphertext!, SaltText!, DecryptionKey!);
 
+                InfoBarIsOpen = true;
+                InfoBarSeverity = InfoBarSeverity.Success;
                 ResultStatus = "Decryption completed successfully";
-                ResultStatusForeground = new SolidColorBrush(Microsoft.UI.Colors.Green);
             }
             catch (Exception ex)
             {
+                InfoBarIsOpen = true;
+                InfoBarSeverity = InfoBarSeverity.Error;
                 ResultStatus = ex.Message.ToString();
-                ResultStatusForeground = new SolidColorBrush(Microsoft.UI.Colors.Red);
             }
             
         }

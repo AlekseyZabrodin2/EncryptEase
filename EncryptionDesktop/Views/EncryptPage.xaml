@@ -82,24 +82,24 @@
                 <CheckBox Content="32" IsChecked="{Binding Bit32IsChecked, Mode=TwoWay}" />
             </StackPanel>
 
-            <StackPanel
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Orientation="Horizontal"
-                Spacing="10">
+            <Grid ColumnDefinitions="400, *" ColumnSpacing="10">
                 <TextBox
-                    x:Name="ResultDecryptingText"
+                    x:Name="ResultEncryptingText"
                     MinWidth="400"
                     HorizontalContentAlignment="Center"
                     FontWeight="SemiBold"
                     Foreground="Yellow"
+                    Header="Encryption result:"
                     IsReadOnly="True"
                     PlaceholderText="result"
                     Text="{Binding ResultEncryptingText}" />
-                <Button Command="{Binding CopyResultInClipboardCommand}">
+                <Button
+                    Grid.Column="1"
+                    VerticalAlignment="Bottom"
+                    Command="{Binding CopyResultInClipboardCommand}">
                     <SymbolIcon Symbol="Copy" />
                 </Button>
-            </StackPanel>
+            </Grid>
 
             <StackPanel
                 HorizontalAlignment="Center"
@@ -112,12 +112,16 @@
                     Content="Encrypt" />
             </StackPanel>
 
-            <TextBlock
-                x:Name="ResultStatusMessage"
-                Foreground="{Binding ResultStatusForeground}"
-                HorizontalTextAlignment="Center"
-                Text="{Binding ResultStatus}" />
-
+            <Grid Height="50">
+                <InfoBar
+                    x:Name="ResultStatusMessage"
+                    HorizontalContentAlignment="Center"
+                    IsClosable="False"
+                    IsOpen="True"
+                    Message="{Binding ResultStatus}"
+                    Severity="{Binding InfoBarSeverity}"
+                    Visibility="{Binding InfoBarIsOpen}" />
+            </Grid>
         </StackPanel>
 
     </Grid>

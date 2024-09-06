@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using EncryptionDesktop.Services;
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using System;
 using System.Collections.Generic;
@@ -52,7 +53,10 @@ namespace EncryptionDesktop.ViewModels
         private string? _resultStatus;
 
         [ObservableProperty]
-        private SolidColorBrush _resultStatusForeground;
+        private bool _infoBarIsOpen;
+
+        [ObservableProperty]
+        private InfoBarSeverity _infoBarSeverity;
 
         private bool _bit16IsChecked;
         public bool Bit16IsChecked
@@ -151,12 +155,14 @@ namespace EncryptionDesktop.ViewModels
                     string.IsNullOrEmpty(EncryptionKey))
                 {
                     IsEnabledButtons = false;
+                    InfoBarIsOpen = true;
+                    InfoBarSeverity = InfoBarSeverity.Error;
                     ResultStatus = $"One of the fields is empty";
-                    ResultStatusForeground = new SolidColorBrush(Microsoft.UI.Colors.Red);
                 }
                 else
                 {
                     IsEnabledButtons = true;
+                    InfoBarIsOpen = false;
                     ResultStatus = string.Empty;
                 }
             }
@@ -173,13 +179,15 @@ namespace EncryptionDesktop.ViewModels
             {
                 ResultEncryptingText = ServiceEncryption.Encrypt(InputEncryptingText!, SaltText!, EncryptionKey!);
 
+                InfoBarIsOpen = true;
+                InfoBarSeverity = InfoBarSeverity.Success;
                 ResultStatus = "Encryption completed successfully";
-                ResultStatusForeground = new SolidColorBrush(Microsoft.UI.Colors.Green);
             }
             catch (Exception ex)
             {
+                InfoBarIsOpen = true;
+                InfoBarSeverity = InfoBarSeverity.Error;
                 ResultStatus = ex.Message.ToString();
-                ResultStatusForeground = new SolidColorBrush(Microsoft.UI.Colors.Red);
             }
         }
 
