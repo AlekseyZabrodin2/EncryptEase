@@ -14,7 +14,8 @@ namespace EncryptionDesktop
         private readonly Dictionary<string, Type> _pagetages = new Dictionary<string, Type>
         {
            { "EncryptPage", typeof(EncryptPage) },
-           { "DecryptPage", typeof(DecryptPage) }
+           { "DecryptPage", typeof(DecryptPage) },
+           { "Settings", typeof(EncryptionSettingsPage) }
         };
 
 
