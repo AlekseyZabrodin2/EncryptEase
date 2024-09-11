@@ -12,6 +12,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.ViewManagement;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -23,22 +24,22 @@ namespace EncryptionDesktop
     /// </summary>
     public sealed partial class MainWindow : Window
     {
-        private MainWindowViewModel _mainViewModel;
+        private UISettings _settings;
 
         public MainWindow()
         {
             this.InitializeComponent();
-            _mainViewModel = new MainWindowViewModel();
-            ExtendsContentIntoTitleBar = true;
+            Content = null;
+            _settings = new UISettings();
         }
 
-        private void NavigationToView(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
-        {
-            if (args.SelectedItemContainer is NavigationViewItem selectedItem)
-            {
-                string selectedTag = selectedItem.Tag.ToString();
-                _mainViewModel.NavigationView(selectedTag, contentFrame);
-            }
-        }
+        //private void NavigationToView(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
+        //{
+        //    if (args.SelectedItemContainer is NavigationViewItem selectedItem)
+        //    {
+        //        string selectedTag = selectedItem.Tag.ToString();
+        //        //_mainViewModel.NavigationView(selectedTag, contentFrame);
+        //    }
+        //}
     }
 }

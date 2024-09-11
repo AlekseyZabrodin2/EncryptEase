@@ -6,21 +6,10 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="using:EncryptionDesktop"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="appMainWindow"
     mc:Ignorable="d">
 
-    <NavigationView SelectionChanged="NavigationToView">
-        <NavigationView.MenuItems>
-            <NavigationViewItem
-                Content="Encrypting"
-                Icon="Admin"
-                Tag="EncryptPage" />
-            <NavigationViewItem
-                Content="Decrypting"
-                Icon="OtherUser"
-                Tag="DecryptPage" />
-        </NavigationView.MenuItems>
-
-        <Frame x:Name="contentFrame" />
-
-    </NavigationView>
+    <Window.SystemBackdrop>
+        <MicaBackdrop />
+    </Window.SystemBackdrop>
 </Window>

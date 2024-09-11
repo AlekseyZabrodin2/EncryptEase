@@ -24,8 +24,14 @@ namespace EncryptionDesktop.Views
     /// </summary>
     public sealed partial class EncryptPage : Page
     {
+        public EncryptViewModel ViewModel
+        {
+            get;
+        }
+
         public EncryptPage()
         {
+            ViewModel = App.GetService<EncryptViewModel>();
             this.InitializeComponent();
             DataContext = new EncryptViewModel();
         }

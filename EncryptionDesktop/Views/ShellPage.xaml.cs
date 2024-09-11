@@ -13,6 +13,7 @@ using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using EncryptionDesktop.ViewModels;
+using Windows.System;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -22,18 +23,31 @@ namespace EncryptionDesktop.Views
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class DecryptPage : Page
+    public sealed partial class ShellPage : Page
     {
-        public DecryptViewModel ViewModel
+        public ShellViewModel ViewModel
         {
             get;
         }
 
-        public DecryptPage()
+
+        public ShellPage(ShellViewModel viewModel)
         {
-            ViewModel = App.GetService<DecryptViewModel>();
+            ViewModel = viewModel;
+
             this.InitializeComponent();
-            DataContext = new DecryptViewModel();
+
+            ViewModel.NavigationService.Frame = contentFrame;
+            ViewModel.NavigationViewService.Initialize(NavigationViewControl);
+
+            App.MainWindow.ExtendsContentIntoTitleBar = true;
+            App.MainWindow.SetTitleBar(AppTitleBar);
+            App.MainWindow.Activated += MainWindow_Activated;
+        }
+
+        private void MainWindow_Activated(object sender, WindowActivatedEventArgs args)
+        {
+            App.AppTitlebar = AppTitleBarText as UIElement;
         }
     }
 }

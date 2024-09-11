@@ -6,6 +6,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="using:EncryptionDesktop.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="using:CommunityToolkit.WinUI.Controls"
+    xmlns:viewmodels="using:EncryptionDesktop.ViewModels"
+    d:DataContext="{d:DesignInstance Type=viewmodels:SettingPageViewModel}"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     mc:Ignorable="d">
 
@@ -16,7 +19,8 @@
         </Grid.RowDefinitions>
         <TextBlock
             x:Name="PageHeader"
-            Margin="36,24,36,0"
+            Margin="36,30,36,0"
+            Style="{StaticResource TitleTextBlockStyle}"
             Text="Settings" />
         <ScrollViewer
             x:Name="contentSV"
@@ -26,35 +30,35 @@
             UseSystemFocusVisuals="False"
             VerticalScrollBarVisibility="Auto"
             VerticalScrollMode="Auto">
-            <StackPanel>
+            <StackPanel Spacing="10">
                 <StackPanel.ChildrenTransitions>
                     <EntranceThemeTransition FromVerticalOffset="50" />
                     <RepositionThemeTransition IsStaggeringEnabled="False" />
                 </StackPanel.ChildrenTransitions>
-                <TextBlock Text="Appearance &amp; behavior" />
-                
-
+                <TextBlock Margin="0,20,0,0" Text="Appearance &amp; behavior" />
+                <toolkit:SettingsCard Description="Select which app theme to display" Header="App theme">
+                    <toolkit:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE790;" />
+                    </toolkit:SettingsCard.HeaderIcon>
+                    <ComboBox
+                        x:Name="themeMode"
+                        AutomationProperties.AutomationId="themeModeComboBox"
+                        ItemsSource="{x:Bind ViewModel.ThemeModes}"
+                        SelectedItem="{x:Bind ViewModel.SelectedThemeMode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </toolkit:SettingsCard>
 
                 <!--  About  -->
-                <TextBlock Text="About" />
-                <!--<toolkit:SettingsExpander Description="© 2024 Microsoft. All rights reserved." Header="{StaticResource AppTitleName}">
+                <TextBlock Margin="0,20,0,0" Text="About" />
+                <toolkit:SettingsExpander Description="© 2024 Zabrodin_DevTech. All rights reserved.">
                     <toolkit:SettingsExpander.HeaderIcon>
                         <BitmapIcon ShowAsMonochrome="False" UriSource="/Assets/Tiles/SmallTile-sdk.png" />
                     </toolkit:SettingsExpander.HeaderIcon>
-                    <TextBlock
-                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                        IsTextSelectionEnabled="True"
-                        Text="{x:Bind Version}" />
                     <toolkit:SettingsExpander.Items>
                         <toolkit:SettingsCard Header="To clone this repository">
-                            <TextBlock
-                                Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                                IsTextSelectionEnabled="True"
-                                Text="git clone https://github.com/microsoft/WinUI-Gallery" />
+                            <TextBlock IsTextSelectionEnabled="True" Text="git clone https://github.com/AlekseyZabrodin2/EncryptEase" />
                         </toolkit:SettingsCard>
                         <toolkit:SettingsCard
                             x:Name="bugRequestCard"
-                            Click="bugRequestCard_Click"
                             Header="File a bug or request new sample"
                             IsClickEnabled="True">
                             <toolkit:SettingsCard.ActionIcon>
@@ -66,7 +70,6 @@
                             ContentAlignment="Vertical"
                             Header="Dependencies &amp; references">
                             <StackPanel Margin="-12,0,0,0" Orientation="Vertical">
-                                <HyperlinkButton Content="{x:Bind WinAppSdkRuntimeDetails}" NavigateUri="https://aka.ms/windowsappsdk" />
                                 <HyperlinkButton Content="Windows UI Library" NavigateUri="https://aka.ms/winui" />
                                 <HyperlinkButton Content="Windows Community Toolkit" NavigateUri="https://aka.ms/toolkit/windows" />
                                 <HyperlinkButton Content="ColorCode-Universal" NavigateUri="https://github.com/WilliamABradley/ColorCode-Universal" />
@@ -78,12 +81,12 @@
                             ContentAlignment="Vertical"
                             Header="THIS CODE AND INFORMATION IS PROVIDED ‘AS IS’ WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.">
                             <StackPanel Margin="-12,0,0,0" Orientation="Vertical">
-                                <HyperlinkButton Content="Microsoft Services Agreement" NavigateUri="https://go.microsoft.com/fwlink/?LinkId=822631" />
-                                <HyperlinkButton Content="Microsoft Privacy Statement" NavigateUri="https://go.microsoft.com/fwlink/?LinkId=521839" />
+                                <!--<HyperlinkButton Content="Microsoft Services Agreement" NavigateUri="https://go.microsoft.com/fwlink/?LinkId=822631" />
+                                <HyperlinkButton Content="Microsoft Privacy Statement" NavigateUri="https://go.microsoft.com/fwlink/?LinkId=521839" />-->
                             </StackPanel>
                         </toolkit:SettingsCard>
                     </toolkit:SettingsExpander.Items>
-                </toolkit:SettingsExpander>-->
+                </toolkit:SettingsExpander>
             </StackPanel>
         </ScrollViewer>
     </Grid>
