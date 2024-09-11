@@ -61,11 +61,6 @@ namespace EncryptionDesktop
                 .UseContentRoot(AppContext.BaseDirectory)
                 .ConfigureServices((context, services) =>
                 {
-                    services.AddTransient<INavigationViewService, NavigationViewService>();
-
-                    services.AddSingleton<IPageService, PageService>();
-                    services.AddSingleton<INavigationService, NavigationService>();
-
                     services.AddTransient<DecryptPage>();
                     services.AddTransient<DecryptViewModel>();
                     services.AddTransient<EncryptPage>();

@@ -61,31 +61,37 @@
                 </Button>
             </Grid>
 
-            <StackPanel
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Orientation="Horizontal"
-                Spacing="10">
+            <StackPanel>
+                <TextBlock Text="Number of iterations:" />
+                <StackPanel
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal"
+                    Spacing="10">
 
-                <CheckBox Content="10000" IsChecked="{Binding Iterations10000IsChecked, Mode=TwoWay}" />
-                <CheckBox Content="25000" IsChecked="{Binding Iterations25000IsChecked, Mode=TwoWay}" />
+                    <CheckBox Content="10000" IsChecked="{Binding Iterations10000IsChecked, Mode=TwoWay}" />
+                    <CheckBox Content="25000" IsChecked="{Binding Iterations25000IsChecked, Mode=TwoWay}" />
+                </StackPanel>
             </StackPanel>
 
             <ComboBox
                 x:Name="HashAlgorithmName"
-                Header="HashAlgorithm Name"
+                Header="HashAlgorithm Name "
                 ItemsSource="{Binding AlgorithmName}"
                 SelectedItem="{Binding SelectedAlgorithmName, Mode=TwoWay}" />
 
-            <StackPanel
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Orientation="Horizontal"
-                Spacing="10">
+            <StackPanel>
+                <TextBlock Text="Key size in bytes:" />
+                <StackPanel
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal"
+                    Spacing="10">
 
-                <CheckBox Content="16" IsChecked="{Binding Bit16IsChecked, Mode=TwoWay}" />
-                <CheckBox Content="24" IsChecked="{Binding Bit24IsChecked, Mode=TwoWay}" />
-                <CheckBox Content="32" IsChecked="{Binding Bit32IsChecked, Mode=TwoWay}" />
+                    <CheckBox Content="16" IsChecked="{Binding Bit16IsChecked, Mode=TwoWay}" />
+                    <CheckBox Content="24" IsChecked="{Binding Bit24IsChecked, Mode=TwoWay}" />
+                    <CheckBox Content="32" IsChecked="{Binding Bit32IsChecked, Mode=TwoWay}" />
+                </StackPanel>
             </StackPanel>
 
             <Grid

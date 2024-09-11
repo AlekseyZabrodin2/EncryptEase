@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using EncryptionDesktop.Services;
 using EncryptionDesktop.Views;
+using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Navigation;
 using System;
@@ -14,43 +15,20 @@ namespace EncryptionDesktop.ViewModels
 {
     public partial class ShellViewModel : ObservableRecipient
     {
-        [ObservableProperty]
-        private bool isBackEnabled;
 
-        [ObservableProperty]
-        private object? selected;
-
-        public INavigationService NavigationService
+        private readonly Dictionary<string, Type> _pagetages = new Dictionary<string, Type>
         {
-            get;
-        }
+           { "EncryptPage", typeof(EncryptPage) },
+           { "DecryptPage", typeof(DecryptPage) },
+           { "Settings", typeof(EncryptionSettingsPage) }
+        };
 
-        public INavigationViewService NavigationViewService
+
+        public void NavigationView(string pageTag, Frame frame)
         {
-            get;
-        }
-
-        public ShellViewModel(INavigationService navigationService, INavigationViewService navigationViewService)
-        {
-            NavigationService = navigationService;
-            NavigationService.Navigated += OnNavigated;
-            NavigationViewService = navigationViewService;
-        }
-
-        private void OnNavigated(object sender, NavigationEventArgs e)
-        {
-            IsBackEnabled = NavigationService.CanGoBack;
-
-            if (e.SourcePageType == typeof(EncryptionSettingsPage))
+            if (_pagetages.TryGetValue(pageTag, out Type pageType))
             {
-                Selected = NavigationViewService.SettingsItem;
-                return;
-            }
-
-            var selectedItem = NavigationViewService.GetSelectedItem(e.SourcePageType);
-            if (selectedItem != null)
-            {
-                Selected = selectedItem;
+                frame.Navigate(pageType);
             }
         }
     }

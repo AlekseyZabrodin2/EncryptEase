@@ -4,7 +4,6 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:helpers="using:EncryptionDesktop.Services"
     xmlns:local="using:EncryptionDesktop.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
@@ -35,17 +34,15 @@
             </StackPanel>
         </Grid>
 
-        <NavigationView x:Name="NavigationViewControl">
+        <NavigationView x:Name="NavigationViewControl" SelectionChanged="NavigationViewControl_SelectionChanged">
             <NavigationView.MenuItems>
                 <NavigationViewItem
                     x:Uid="EncryptPage"
-                    helpers:NavigationHelper.NavigateTo="EncryptionDesktop.ViewModels.EncryptViewModel"
                     Content="Encrypting"
                     Icon="Admin"
                     Tag="EncryptPage" />
                 <NavigationViewItem
                     x:Uid="DecryptPage"
-                    helpers:NavigationHelper.NavigateTo="EncryptionDesktop.ViewModels.DecryptViewModel"
                     Content="Decrypting"
                     Icon="OtherUser"
                     Tag="DecryptPage" />

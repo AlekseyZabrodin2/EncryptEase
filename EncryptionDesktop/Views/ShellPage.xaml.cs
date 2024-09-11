@@ -14,6 +14,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using EncryptionDesktop.ViewModels;
 using Windows.System;
+using EncryptionDesktop.Services;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -25,20 +26,15 @@ namespace EncryptionDesktop.Views
     /// </summary>
     public sealed partial class ShellPage : Page
     {
-        public ShellViewModel ViewModel
-        {
-            get;
-        }
 
+        public ShellViewModel ViewModel {  get; }
 
         public ShellPage(ShellViewModel viewModel)
         {
             ViewModel = viewModel;
 
             this.InitializeComponent();
-
-            ViewModel.NavigationService.Frame = contentFrame;
-            ViewModel.NavigationViewService.Initialize(NavigationViewControl);
+            DataContext = new ShellViewModel();
 
             App.MainWindow.ExtendsContentIntoTitleBar = true;
             App.MainWindow.SetTitleBar(AppTitleBar);
@@ -48,6 +44,15 @@ namespace EncryptionDesktop.Views
         private void MainWindow_Activated(object sender, WindowActivatedEventArgs args)
         {
             App.AppTitlebar = AppTitleBarText as UIElement;
+        }
+
+        private void NavigationViewControl_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
+        {
+            if (args.SelectedItemContainer is NavigationViewItem selectedItem)
+            {
+                string selectedTag = selectedItem.Tag.ToString();
+                ViewModel.NavigationView(selectedTag, contentFrame);
+            }
         }
     }
 }
