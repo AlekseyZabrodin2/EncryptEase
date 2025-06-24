@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "EncryptionHelper": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
