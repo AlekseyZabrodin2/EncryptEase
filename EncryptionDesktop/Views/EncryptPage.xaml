@@ -48,11 +48,11 @@
 
             <Grid ColumnDefinitions="400, *" ColumnSpacing="10">
                 <TextBox
-                    x:Name="SaltText"
+                    x:Name="EncryptionSalt"
                     MinWidth="400"
                     Header="Enter salt Text:"
                     PlaceholderText="salt"
-                    Text="{Binding SaltText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    Text="{Binding EncryptionSalt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <Button
                     Grid.Column="1"
                     VerticalAlignment="Bottom"

@@ -25,7 +25,7 @@ namespace EncryptionDesktop.ViewModels
         private string? _decryptionKey;
 
         [ObservableProperty]
-        private string? _saltText;
+        private string? _decryptionSalt;
 
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(DecryptCommand))]
@@ -155,11 +155,11 @@ namespace EncryptionDesktop.ViewModels
         private void DecryptProperties_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(InputCiphertext) ||
-                e.PropertyName == nameof(SaltText) ||
+                e.PropertyName == nameof(DecryptionSalt) ||
                 e.PropertyName == nameof(DecryptionKey))
             {
                 if (string.IsNullOrEmpty(InputCiphertext) ||
-                    string.IsNullOrEmpty(SaltText) ||
+                    string.IsNullOrEmpty(DecryptionSalt) ||
                     string.IsNullOrEmpty(DecryptionKey))
                 {
                     IsEnabledButtons = false;
@@ -184,7 +184,7 @@ namespace EncryptionDesktop.ViewModels
 
             try
             {
-                ResultDecryptingText = ServiceEncryption.Decrypt(InputCiphertext!, SaltText!, DecryptionKey!);
+                ResultDecryptingText = ServiceEncryption.Decrypt(InputCiphertext!, DecryptionSalt!, DecryptionKey!);
 
                 InfoBarIsOpen = true;
                 InfoBarSeverity = InfoBarSeverity.Success;
@@ -234,10 +234,10 @@ namespace EncryptionDesktop.ViewModels
         [RelayCommand]
         private async Task CopySaltInClipboard()
         {
-            if (!string.IsNullOrEmpty(SaltText))
+            if (!string.IsNullOrEmpty(DecryptionSalt))
             {
                 var package = new DataPackage();
-                package.SetText(SaltText);
+                package.SetText(DecryptionSalt);
                 Clipboard.SetContent(package);
 
                 CopySaltButtonIcon = Symbol.Accept;

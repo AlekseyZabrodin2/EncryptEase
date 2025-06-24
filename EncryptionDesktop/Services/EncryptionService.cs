@@ -1,16 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace EncryptionDesktop.Services
 {
     public class EncryptionService
     {
 
-        public string Encrypt(string clearText, string saltText, string encryptionKey)
+        public string Encrypt(string clearText, string encryptionSalt, string encryptionKey)
         {
             byte[] clearBytes = Encoding.Unicode.GetBytes(clearText);
 
@@ -22,7 +19,7 @@ namespace EncryptionDesktop.Services
             }
 
             // Преобразование текстовой соли в массив байтов
-            byte[] saltBytes = Encoding.UTF8.GetBytes(saltText);
+            byte[] saltBytes = Encoding.UTF8.GetBytes(encryptionSalt);
 
             using (Aes aes = Aes.Create())
             {
@@ -44,7 +41,7 @@ namespace EncryptionDesktop.Services
             }
         }
 
-        public string Decrypt(string cipherText, string saltText, string decryptionKey)
+        public string Decrypt(string cipherText, string encryptionSalt, string decryptionKey)
         {
             byte[] cipherBytes = Convert.FromBase64String(cipherText);
 
@@ -56,7 +53,7 @@ namespace EncryptionDesktop.Services
             Array.Copy(cipherBytes, iv.Length, encryptedBytes, 0, encryptedBytes.Length);
 
             // Преобразование текстовой соли в массив байтов
-            byte[] saltBytes = Encoding.UTF8.GetBytes(saltText);
+            byte[] saltBytes = Encoding.UTF8.GetBytes(encryptionSalt);
 
             using (Aes aes = Aes.Create())
             {
