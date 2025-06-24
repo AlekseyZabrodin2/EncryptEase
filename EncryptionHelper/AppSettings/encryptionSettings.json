@@ -1,0 +1,6 @@
+﻿{
+  "EncryptionSettings": {
+    "EncryptionKey": "EncryptionKey_dev",
+    "EncryptionSalt": "EncryptionSalt_dev"
+  }
+}
