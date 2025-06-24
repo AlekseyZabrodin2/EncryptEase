@@ -1,16 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Microsoft.Extensions.Options;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace EncryptionHelper
 {
     public class EncryptionHelper
     {
-        private static readonly string _encryptionKey = "12345";
-        private static readonly string _saltText = "1234567890";
+        private readonly EncryptionSettings _encryptionSettings;
+
+        public EncryptionHelper(IOptions<EncryptionSettings> options)
+        {
+            _encryptionSettings = options.Value;
+        }
 
         public string Encrypt(string clearText)
         {
@@ -24,11 +25,11 @@ namespace EncryptionHelper
             }
 
             // Преобразование текстовой соли в массив байтов
-            byte[] saltBytes = Encoding.UTF8.GetBytes(_saltText);
+            byte[] saltBytes = Encoding.UTF8.GetBytes(_encryptionSettings.EncryptionSalt);
 
             using (Aes aes = Aes.Create())
             {
-                byte[] keyBytes = Rfc2898DeriveBytes.Pbkdf2(_encryptionKey, saltBytes, 10000, HashAlgorithmName.SHA256, 32);
+                byte[] keyBytes = Rfc2898DeriveBytes.Pbkdf2(_encryptionSettings.EncryptionKey, saltBytes, 10000, HashAlgorithmName.SHA256, 32);
                 aes.Key = keyBytes;
                 aes.IV = iv;
 
@@ -58,11 +59,11 @@ namespace EncryptionHelper
             Array.Copy(cipherBytes, iv.Length, encryptedBytes, 0, encryptedBytes.Length);
 
             // Преобразование текстовой соли в массив байтов
-            byte[] saltBytes = Encoding.UTF8.GetBytes(_saltText);
+            byte[] saltBytes = Encoding.UTF8.GetBytes(_encryptionSettings.EncryptionSalt);
 
             using (Aes aes = Aes.Create())
             {
-                byte[] keyBytes = Rfc2898DeriveBytes.Pbkdf2(_encryptionKey, saltBytes, 10000, HashAlgorithmName.SHA256, 32);
+                byte[] keyBytes = Rfc2898DeriveBytes.Pbkdf2(_encryptionSettings.EncryptionKey, saltBytes, 10000, HashAlgorithmName.SHA256, 32);
                 aes.Key = keyBytes;
                 aes.IV = iv;
 
