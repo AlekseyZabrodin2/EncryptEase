@@ -1,61 +1,48 @@
 # EncryptEase
 
-EncryptEase — это настольное приложение, предназначенное для безопасного шифрования данных с использованием хеш-алгоритма SHA-256. 
-Приложение будет полезно всем, кто хочет защитить свою конфиденциальную информацию.
+EncryptEase is a desktop application designed for secure data hashing using the SHA-256 algorithm. It is useful for anyone who wants to protect confidential information by generating reliable hashes.
 
-## Основные возможности
+## Features
 
-- **Безопасное шифрование**: Шифруйте текст с использованием надежного хеш-алгоритма SHA-256.
-- **Простой интерфейс**: Интуитивно понятный пользовательский интерфейс для быстрого шифрования.
-- **Копирование в буфер обмена**: Легко копируйте зашифрованный текст в буфер обмена одним кликом.
+- Secure hashing: Generate SHA-256 hashes for input text.
+- Simple interface: Intuitive UI for quick operations.
+- Copy to clipboard: Copy the resulting hash with one click.
 
-Алгоритм `SHA-256` (Secure Hash Algorithm 256) является одним из самых распространенных алгоритмов хеширования и представляет собой 
-стандарт для большинства криптографических приложений, включая обеспечение целостности данных, создание цифровых подписей и шифрование. 
-Он принадлежит к семейству алгоритмов **SHA-2**.
+`SHA-256` (Secure Hash Algorithm 256) is one of the most widely used hashing algorithms. It is a standard for many cryptographic applications, including data integrity, digital signatures, and more. It belongs to the **SHA-2** family.
 
-### Подробное описание алгоритма SHA-256
+### About SHA-256
 
-#### Размер выходного хеша:
-- **SHA-256** генерирует хеш длиной **256 бит** (32 байта). Этот размер означает, что независимо от размера входных данных, всегда будет 
-производиться фиксированный выходной хеш размером 32 байта.
+#### Output size
+- SHA-256 produces a hash of 256 bits (32 bytes). Regardless of the input size, the output is a fixed-length 32-byte value.
 
-#### Уровень безопасности:
-- **SHA-256** считается **очень безопасным** и устойчивым к большинству известных криптографических атак, таких как атаки на коллизии и предварительные 
-изображения (preimage attacks).
-- Используется во многих критически важных системах, таких как **SSL/TLS** (протоколы безопасности интернета), **блокчейн**, **PKI** (инфраструктура открытого ключа), 
-**хранение паролей**, **цифровые подписи** и т.д.
+#### Security level
+- SHA-256 is considered very secure and resistant to known cryptographic attacks such as collision and preimage attacks.
+- It is used in critical systems such as SSL/TLS, blockchain, PKI, password storage, and digital signatures.
 
-#### Производительность:
-- **SHA-256** быстрее, чем его более длинные аналоги, такие как **SHA-384** и **SHA-512**, так как его хеш имеет меньший размер.
-- Он достаточно **эффективен** для использования в мобильных и серверных приложениях, где важна производительность.
-- Применяется в системах, требующих больших объемов хеширования.
+#### Performance
+- SHA-256 is faster than longer variants like SHA-384 and SHA-512 due to its smaller output size.
+- It is efficient for both mobile and server applications where performance matters.
+- Commonly used in systems requiring large volumes of hashing.
 
-#### Применение:
-- **SHA-256** используется для большинства задач, требующих безопасности и защиты данных:
-  - **Цифровые подписи**: Обеспечение целостности и подлинности цифровых сообщений и документов.
-  - **Сертификаты SSL/TLS**: Обеспечивает шифрование и защиту данных при передаче в сети.
-  - **Хеширование паролей**: Хранение паролей в защищенном виде в базе данных.
-  - **Блокчейн и криптовалюты**: SHA-256 используется для создания уникальных цифровых подписей и подтверждений транзакций.
+#### Use cases
+- SHA-256 is suitable for most data protection and security-related tasks:
+  - Digital signatures: Ensuring integrity and authenticity of messages and documents.
+  - SSL/TLS certificates: Protecting data in transit across networks.
+  - Password hashing: Storing passwords in a secure hashed form.
+  - Blockchain and cryptocurrencies: Creating unique digital signatures and verifying transactions.
 
-#### Преимущества и недостатки:
-- **Преимущества**:
-  - **Быстрота**: Поддерживается в большинстве современных систем и криптографических библиотек, что обеспечивает высокую скорость вычислений.
-  - **Широкая поддержка**: Является стандартом и поддерживается практически всеми библиотеками, фреймворками и криптографическими приложениями.
-  - **Устойчивость к атакам**: На данный момент считается защищенным от известных типов атак, таких как атаки на коллизии.
-- **Недостатки**:
-  - **Не самый высокий уровень защиты**: Для критически важных приложений, таких как защита национальной безопасности или приложения, требующие более высокого 
-уровня защиты, **SHA-384** или **SHA-512** могут быть предпочтительными.
+#### Pros and cons
+- Advantages:
+  - Speed: Supported by most modern systems and cryptographic libraries, enabling high performance.
+  - Broad support: A standard algorithm available in nearly all libraries and frameworks.
+  - Attack resistance: Currently considered secure against known attack types such as collisions.
+- Limitations:
+  - Not the highest possible security level: For highly critical applications, SHA-384 or SHA-512 may be preferred.
 
-#### Когда использовать SHA-256 и SHA-384
+#### When to choose SHA-256 vs SHA-384/512
+- SHA-256 offers a balance between performance and security for most hashing needs and is a solid default choice.
+- SHA-384 or SHA-512 can be used when a higher security margin is required or when the larger output size is beneficial, at the cost of performance.
 
-- **SHA-256** подходит для **большинства задач** хеширования, где требуется баланс между **производительностью и безопасностью**. Это хороший выбор для большинства 
-современных криптографических приложений.
-- **SHA-384** или **SHA-512** могут быть использованы, когда требуется более высокий уровень защиты или когда размер хеша имеет значение для приложения. 
-Эти алгоритмы медленнее, чем SHA-256, но обеспечивают более высокую степень безопасности.
-
-#### Заключение
-
-- **SHA-256** — это алгоритм хеширования, который обеспечивает **сбалансированное сочетание безопасности и производительности**. Он широко используется в 
-современных криптографических приложениях и подходит для большинства случаев, требующих надежной защиты данных.
-- Если ваши требования к безопасности не являются экстремальными, SHA-256 — отличный выбор для создания хешей, хранения паролей, создания цифровых подписей и 
-других криптографических задач.
+#### Conclusion
+- SHA-256 provides a balanced combination of security and performance. It is widely used in modern cryptographic applications and is suitable for most cases requiring reliable data protection.
+- If your security requirements are not extreme, SHA-256 is an excellent choice for hashing, password storage, digital signatures, and similar tasks.
