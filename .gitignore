@@ -263,3 +263,5 @@ __pycache__/
 # Ignore for UserSecrets documents
 **/secrets.json
 **/UserSecrets/
+
+**/[Ll]icenseKey/

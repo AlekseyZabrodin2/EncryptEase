@@ -41,11 +41,17 @@
                     Content="Encrypting"
                     Icon="Admin"
                     Tag="EncryptPage" />
+
                 <NavigationViewItem
                     x:Uid="DecryptPage"
                     Content="Decrypting"
                     Icon="OtherUser"
                     Tag="DecryptPage" />
+
+                <NavigationViewItem
+                    Content="License Generator"
+                    Icon="ProtectedDocument"
+                    Tag="LicenseGeneratorPage" />
             </NavigationView.MenuItems>
 
             <Frame x:Name="contentFrame" />
