@@ -1,15 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using EncryptionDesktop.Services;
 using EncryptionDesktop.Views;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.UI.ApplicationSettings;
 
 namespace EncryptionDesktop.ViewModels
 {
@@ -20,6 +13,7 @@ namespace EncryptionDesktop.ViewModels
         {
            { "EncryptPage", typeof(EncryptPage) },
            { "DecryptPage", typeof(DecryptPage) },
+           { "LicenseGeneratorPage", typeof(LicenseGeneratorPage) },
            { "Settings", typeof(EncryptionSettingsPage) }
         };
 
