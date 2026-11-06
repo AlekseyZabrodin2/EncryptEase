@@ -236,7 +236,7 @@ public partial class LicenseGeneratorViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private void TamperLicense()
+    private void ModifyLicense()
     {
         if (string.IsNullOrWhiteSpace(LicenseContent))
         {
@@ -259,7 +259,7 @@ public partial class LicenseGeneratorViewModel : ObservableObject
                 Signature = originalDocument.Signature
             };
 
-            string outputPath = Path.Combine(SelectedFolder, "license_modified.lic");
+            string outputPath = Path.Combine(SelectedFolder, "activation_modified.lic");
 
             File.WriteAllText(
                 outputPath,

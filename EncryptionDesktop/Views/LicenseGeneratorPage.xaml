@@ -157,8 +157,8 @@
 
                         <Button
                             HorizontalAlignment="Stretch"
-                            Command="{Binding TamperLicenseCommand}"
-                            Content="Tamper License" />
+                            Command="{Binding ModifyLicenseCommand}"
+                            Content="Modify License" />
 
                         <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
                             <TextBox
