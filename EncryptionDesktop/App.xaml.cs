@@ -69,6 +69,10 @@ namespace EncryptionDesktop
                     services.AddSingleton<SettingPageViewModel>();
                     services.AddTransient<ShellPage>();
                     services.AddTransient<ShellViewModel>();
+                    services.AddSingleton<EncryptionService>();
+                    services.AddSingleton<LicenseKeyService>();
+                    services.AddTransient<LicenseGeneratorViewModel>();
+                    services.AddTransient<LicenseGeneratorPage>();
                 })
                 .Build();
         }
